@@ -23,8 +23,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Set up API key
+        run: echo "API_KEY=${{ secrets.API_KEY }}" > .env
+
       - name: Build executable
-        run: pyinstaller --onefile --windowed currency_converter.py
+        run: pyinstaller --onefile windowed currency_converter.py
 
       - name: Upload executable
         uses: actions/upload-artifact@v2
